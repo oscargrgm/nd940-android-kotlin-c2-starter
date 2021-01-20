@@ -1,5 +1,4 @@
-package com.udacity.asteroidradar.detail
-
+package com.udacity.asteroidradar.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,12 +10,14 @@ import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding = FragmentDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val asteroid = DetailFragmentArgs.fromBundle(arguments!!).selectedAsteroid
+        val asteroid = DetailFragmentArgs.fromBundle(requireArguments()).selectedAsteroid
 
         binding.asteroid = asteroid
 
@@ -28,9 +29,10 @@ class DetailFragment : Fragment() {
     }
 
     private fun displayAstronomicalUnitExplanationDialog() {
-        val builder = AlertDialog.Builder(activity!!)
-            .setMessage(getString(R.string.astronomica_unit_explanation))
+        AlertDialog.Builder(requireActivity())
+            .setMessage(getString(R.string.astronomical_unit_explanation))
             .setPositiveButton(android.R.string.ok, null)
-        builder.create().show()
+            .create()
+            .show()
     }
 }
